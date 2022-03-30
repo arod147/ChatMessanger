@@ -4,6 +4,8 @@ import axios from "axios";
 
 import SigninImage from "../assets/signup.jpg";
 
+const cookies = new Cookies();
+
 const initialState = {
   fullName: "",
   username: "",
@@ -21,9 +23,21 @@ const Auth = () => {
     setFrom({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    const { fullName, username, password, phoneNumber, avatarURL } = form;
+
+    const URL = "http://localhost:5000/auth";
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post(
+      `${URL}/${isSignup ? "signup" : "login"}`,
+      username,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL
+    );
   };
 
   const switchMode = () => {
