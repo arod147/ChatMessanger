@@ -31,6 +31,7 @@ const EditChannel = ({ setIsEditing }) => {
 
   const updateChannel = async (event) => {
     event.preventDefault();
+
     const nameChanged = channelName !== (channel.data.name || channel.data.id);
 
     if (nameChanged) {
@@ -48,6 +49,7 @@ const EditChannel = ({ setIsEditing }) => {
     setIsEditing(false);
     setSelectedUsers([]);
   };
+
   return (
     <div className="edit-channel__container">
       <div className="edit-channel__header">
